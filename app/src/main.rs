@@ -1,4 +1,14 @@
-fn main() {
+use solana_program::{
+    account_info::{next_acount_info, AccountInfo},
+    entrypoint,
+    entrypoint::ProgramResult,
+    msg,
+    program_error::ProgramErorr,
+    pubkey::Pubkey
+    rent::Rent,
+    sysvar::Sysvar,
+}
+
     pub struct CampaignAccount {
         pub campaign_owner: Pubkey,
         pub campaign_amount: u64,
@@ -23,4 +33,12 @@ fn main() {
             // withdraw all the collected funds and close campaign
         }
     }
-}
+
+    let iterable_accounts = &mut accounts.iter();
+    let campaign_account = next_account_info(iterable_accounts);
+
+    let amout = rest_of_data
+        .get(..8)
+        .and_then(|slice| slice.try_into().ok())
+        .map(u64::from_le_bytes)
+        .unwrap();

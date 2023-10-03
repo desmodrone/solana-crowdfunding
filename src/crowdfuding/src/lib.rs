@@ -5,23 +5,42 @@ use solana_program::{
 // telling solana to enter our program on `process_instruction`
 entrypoint!(process_instruction);
 
+pub struct CampaignAccount {
+    pub campaign_owner: Pubkey,
+    pub campaign_amount: u64,
+    pub campaign_description: String,
+    pub campaign_fulfilled: u64,
+}
+
 fn process_instruction(
     program_id: &Pubkey,
     accounts: &[AccountInfo],
     instruction_data: &[u8],
 ) -> ProgramResult {
-    let (instruction_byte, all_other_bytes) = data.split_first().unwrap();
+    let (instruction_byte, rest_of_data) = instruction_data.split_first().unwrap();
 
-    if *instruction_byte == 0 {
-        //create campaign
-    } else if *instruction_byte == 1 {
-        //fund campaing
-    } else if *instruction_byte == 2 {
-        // get how many funds are left to reach the requested amount
-    } else if *instruction_byte == 3 {
-        // withdraw all the collected funds and close campaign
+    match *instruction_byte {
+        0 => create_campaign(program_id, accounts, rest_of_data), // Call a separate function for creating a campaign.
+        1 => fund_campaign(program_id, accounts, rest_of_data), // Call a separate function for funding a campaign.
+        2 => get_funds_remaining(program_id, accounts), // Call a separate function to get remaining funds.
+        3 => withdraw_and_close_campaign(program_id, accounts), // Call a separate function to withdraw funds and close.
+        _ => {
+            // Handle unknown instructions or errors.
+            msg!("Unknown instruction received");
+            Err(ProgramError::InvalidInstructionData)
+        }
     }
-    // msg! prints out as a log
-    msg!("Hello Solana (From the Rust side!)");
+}
+
+fn create_campaign(
+    program_id: &Pubkey,
+    accounts: &[AccountInfo],
+    rest_of_data: &[u8],
+) -> ProgramResult {
+    // Implement the logic for creating a campaign here.
+    // Use the provided accounts and data as needed.
+    // You can also call helper functions if necessary.
+    // ...
+
     Ok(())
 }
