@@ -1,3 +1,5 @@
+use borsh::{BorshDeserialize, BorshSerialize};
+
 use solana_program::{
     account_info::AccountInfo, entrypoint, entrypoint::ProgramResult, msg, pubkey::Pubkey,
 };
@@ -5,6 +7,7 @@ use solana_program::{
 // telling solana to enter our program on `process_instruction`
 entrypoint!(process_instruction);
 
+#[derive(BorshSerialize, BorshDeserialize, Debug)]
 pub struct CampaignAccount {
     pub campaign_owner: Pubkey,
     pub campaign_amount: u64,
@@ -44,5 +47,39 @@ fn create_campaign(
         .get(..8)
         .and_then(|slice| slice.try_into().ok())
         .map(u64::from_le_bytes)?;
+    Ok(())
+}
+
+fn create_campaign_account(
+    campaign_account: &mut AccountInfo,
+    amount: u64,
+    description: String,
+) -> ProgramResult {
+    let mut campaign_account_data =
+        CampaignAccount::try_from_slice(&campaign_account.data.borrow_mut())?;
+
+    campaign_account_data.campaign_amount = amount;
+    campaign_account_data.campaign_description = description;
+    campaign_account_data.campaign_fulfilled = 0;
+
+    // Serialize the modified data and write it back to the account.
+    campaign_account_data.serialize(&mut &mut campaign_account.data.borrow_mut()[..])?;
+
+    Ok(())
+}
+
+fn get_campaign_status(accounts: &[AccountInfo]) -> ProgramResult {
+    // Assuming the first account in the accounts list is the campaign account.
+    let campaign_account = next_account_info(accounts)?;
+
+    let campaign_account_data = CampaignAccount::try_from_slice(&campaign_account.data.borrow())?;
+
+    // Calculate the amount left to be collected.
+    let amount_left =
+        campaign_account_data.campaign_amount - campaign_account_data.campaign_fulfilled;
+
+    // Print the amount left using msg.
+    msg!("Amount left to be collected: {}", amount_left);
+
     Ok(())
 }
