@@ -37,10 +37,12 @@ fn create_campaign(
     accounts: &[AccountInfo],
     rest_of_data: &[u8],
 ) -> ProgramResult {
-    // Implement the logic for creating a campaign here.
-    // Use the provided accounts and data as needed.
-    // You can also call helper functions if necessary.
-    // ...
+    let iterable_accounts = &mut accounts.iter();
+    let campaign_account = next_account_info(iterable_accounts);
 
+    let amount = rest_of_data
+        .get(..8)
+        .and_then(|slice| slice.try_into().ok())
+        .map(u64::from_le_bytes)?;
     Ok(())
 }
