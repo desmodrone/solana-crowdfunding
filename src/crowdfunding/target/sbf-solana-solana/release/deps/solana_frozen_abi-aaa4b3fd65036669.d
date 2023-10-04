@@ -1,0 +1,10 @@
+/Users/desmo/repos/solana-crowdfunding/src/crowdfunding/target/sbf-solana-solana/release/deps/solana_frozen_abi-aaa4b3fd65036669.rmeta: /Users/desmo/.cargo/registry/src/github.com-1ecc6299db9ec823/solana-frozen-abi-1.17.0/src/lib.rs /Users/desmo/.cargo/registry/src/github.com-1ecc6299db9ec823/solana-frozen-abi-1.17.0/src/abi_digester.rs /Users/desmo/.cargo/registry/src/github.com-1ecc6299db9ec823/solana-frozen-abi-1.17.0/src/abi_example.rs /Users/desmo/.cargo/registry/src/github.com-1ecc6299db9ec823/solana-frozen-abi-1.17.0/src/hash.rs
+
+/Users/desmo/repos/solana-crowdfunding/src/crowdfunding/target/sbf-solana-solana/release/deps/libsolana_frozen_abi-aaa4b3fd65036669.rlib: /Users/desmo/.cargo/registry/src/github.com-1ecc6299db9ec823/solana-frozen-abi-1.17.0/src/lib.rs /Users/desmo/.cargo/registry/src/github.com-1ecc6299db9ec823/solana-frozen-abi-1.17.0/src/abi_digester.rs /Users/desmo/.cargo/registry/src/github.com-1ecc6299db9ec823/solana-frozen-abi-1.17.0/src/abi_example.rs /Users/desmo/.cargo/registry/src/github.com-1ecc6299db9ec823/solana-frozen-abi-1.17.0/src/hash.rs
+
+/Users/desmo/repos/solana-crowdfunding/src/crowdfunding/target/sbf-solana-solana/release/deps/solana_frozen_abi-aaa4b3fd65036669.d: /Users/desmo/.cargo/registry/src/github.com-1ecc6299db9ec823/solana-frozen-abi-1.17.0/src/lib.rs /Users/desmo/.cargo/registry/src/github.com-1ecc6299db9ec823/solana-frozen-abi-1.17.0/src/abi_digester.rs /Users/desmo/.cargo/registry/src/github.com-1ecc6299db9ec823/solana-frozen-abi-1.17.0/src/abi_example.rs /Users/desmo/.cargo/registry/src/github.com-1ecc6299db9ec823/solana-frozen-abi-1.17.0/src/hash.rs
+
+/Users/desmo/.cargo/registry/src/github.com-1ecc6299db9ec823/solana-frozen-abi-1.17.0/src/lib.rs:
+/Users/desmo/.cargo/registry/src/github.com-1ecc6299db9ec823/solana-frozen-abi-1.17.0/src/abi_digester.rs:
+/Users/desmo/.cargo/registry/src/github.com-1ecc6299db9ec823/solana-frozen-abi-1.17.0/src/abi_example.rs:
+/Users/desmo/.cargo/registry/src/github.com-1ecc6299db9ec823/solana-frozen-abi-1.17.0/src/hash.rs:
