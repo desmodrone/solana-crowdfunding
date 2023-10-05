@@ -3,7 +3,7 @@ Solana crowdfunding platform
 
 
 ## Running the solana-crowdfunding platform locally
-- start by running `solnana-test-validator` on your local machine
+- start by running `solana-test-validator` on your local machine
 - In your project folder, (where your Cargo.toml file is located) run `cargo build-bpf `
 that will build your project and add it to your target folder.
 - now run `solana program deploy <program/path/program.so>` in my case it's
