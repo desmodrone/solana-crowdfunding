@@ -31,6 +31,19 @@ pub struct CampaignAccount {
 
 entrypoint!(process_instruction);
 
+#[derive(Debug, Copy, Clone)]
+pub enum MyCustomError {
+    InvalidInstruction,
+    InvalidAmount,
+    InvalidDescription,
+}
+
+impl From<MyCustomError> for ProgramError {
+    fn from(e: MyCustomError) -> Self {
+        ProgramError::Custom(e as u32)
+    }
+}
+
 pub fn process_instruction(
     program_id: &Pubkey, 
     accounts: &[AccountInfo], 
@@ -40,15 +53,15 @@ pub fn process_instruction(
     let accounts_iter = &mut accounts.iter();
     let campaign_account = next_account_info(accounts_iter)?;
 
-    let (instruction_byte, rest_of_data) = data.split_first().unwrap();
+    let (instruction_byte, rest_of_data) = data.split_first().ok_or(MyCustomError::InvalidInstruction)?;
 
     let amount = rest_of_data
-      .get(..8)
-      .and_then(|slice| slice.try_into().ok())
-      .map(u64::from_le_bytes)
-      .unwrap();
-      
-    let description = String::from_utf8(rest_of_data[9..].to_vec()).unwrap();      
+        .get(..8)
+        .and_then(|slice| slice.try_into().ok())
+        .map(u64::from_le_bytes)
+        .ok_or(MyCustomError::InvalidAmount)?;
+    
+    let description = String::from_utf8(rest_of_data[9..].to_vec()).map_err(|_| MyCustomError::InvalidDescription)?;  
 
     if *instruction_byte == 0 {
       let campaign_owner_account = next_account_info(accounts_iter)?;
