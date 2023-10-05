@@ -144,4 +144,5 @@ fabric.properties
 *.vsix
 
 /test-ledger/
+/src/crowdfunding/test-ledger/
 /target/
