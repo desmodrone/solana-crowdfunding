@@ -505,6 +505,7 @@ name = "crowdfunding"
 version = "0.1.0"
 dependencies = [
  "borsh 0.10.3",
+ "l",
  "solana-program",
  "solana-sdk",
 ]
@@ -872,6 +873,12 @@ checksum = "8f6d5ed8676d904364de097082f4e7d240b571b67989ced0240f08b7f966f940"
 dependencies = [
  "cpufeatures",
 ]
+
+[[package]]
+name = "l"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7193a91d78adc4421e225a4eed28f32e9105e3e8973c078e4c57538b2a079435"
 
 [[package]]
 name = "lazy_static"
