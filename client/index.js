@@ -16,13 +16,14 @@ const rpcUrl = 'http://127.0.0.1:8899';
 const connection = new Connection(rpcUrl, 'confirmed');
 
 // Example programId. Replace with actual deployed program's id
-const programId = new PublicKey('BASWjFeSUEx83XRSdjn8TASa59HUMytSnv3CfEBChYqL');
+const programId = new PublicKey('2N9QwVW2HiDBnVpq4jFMEt3Q66w8D8udiBb7xXNVgGga');
 
 // Establish connection and log the version
 async function establishConnection() {
     const version = await connection.getVersion();
     console.log('Connection to cluster established:', rpcUrl, version);
 }
+
 
 // Fetch Keypair from a local file
 async function createKeypairFromFile() {
@@ -54,7 +55,6 @@ async function signAndSendTransaction(transaction) {
 }
 
 
-// Example interaction with the deployed program
 async function interactWithProgram() {
     try {
         // Example public key for new account, seed should be unique per each new account
@@ -65,11 +65,14 @@ async function interactWithProgram() {
             programId,
         );
 
-        // Example instruction
+        // instruction
+        const instructionData = Uint8Array.of(0);
+        console.log('Sending transaction with data:', Buffer.from(instructionData)); 
+        
         const instruction = new TransactionInstruction({
             keys: [{pubkey: newAccountPubkey, isSigner: false, isWritable: true}],
             programId: programId,
-            data: Buffer.from(Uint8Array.of(0)), // Pass data as per your program's expected schema
+            data: Buffer.from(instructionData),
         });
 
         const transaction = await setPayerAndBlockhashTransaction([instruction]);
